@@ -53,7 +53,7 @@ print(check_domain_availability("example.com"))
 This script will return `True` if the domain is available, "Not available. Expiry date: [expiry date]" if the domain is not available and expiry date is found and "Not available" if expiry date is not found.
 Please note that some TLDs(Top-level domains) and registrars may not provide the expiration date in the WHOIS information. In such cases, the script will not be able to retrieve the expiry date and return "Not available" instead. Also this script only checks the availability of top level domain, and not the sub-domains.
 
-**(COMMENT: At this point I treated it as if I didn't know how to run a script from the command line to see how it would explain it)**
+>**(COMMENT: At this point I treated it as if I didn't know how to run a script from the command line to see how it would explain it)**
 
 *Me: how would i invoke this script from the command line in bash*
 
@@ -83,8 +83,8 @@ $ ./script.py example.com
 Please note that you may need to adjust the path to the `python` interpreter depending on your system configuration.
 Also make sure that you have python installed in your system before running these commands.
 
-**(COMMENT: Of course this doesn't work. The script as written so far cannot take command line arguments but in reality only 
-runs the command print(check_domain_availability("example.com")) regardless of what domain you try to pass)**
+>**(COMMENT: Of course this doesn't work. The script as written so far cannot take command line arguments but in reality only 
+>runs the command print(check_domain_availability("example.com")) regardless of what domain you try to pass)**
 
 *Me: this script does not take arguments from the command line*
 
@@ -201,8 +201,8 @@ $ python script.py --domain example.com
 ```
 Please note that you may need to adjust the path to the `python` interpreter depending on your system configuration. Also make sure that you have python and argparse installed in your system before running these commands.
 
-**(COMMENT: At this point the script still had an error. It would not return the correct result if a domain was available, instead it would return an error.
-I just told ChatGPT what it was doing to see what the response would be)**
+>**(COMMENT: At this point the script still had an error. It would not return the correct result if a domain was available, instead it would return an error.
+>I just told ChatGPT what it was doing to see what the response would be)**
 
 *Me: if the domain is available, this script returns "Error: Invalid domain name or unable to connect to WHOIS server."*
 
@@ -240,8 +240,8 @@ This script will return the correct availability status for both available and n
 Please note that some TLDs(Top-level domains) and registrars may not provide the expiration date in the WHOIS information. In such cases, the script will not be able to retrieve the expiry date and return "example.com is not available" instead of "example.com is not available. Expiry date: [expiry date]"
 Also this script only checks the availability of top level domain, and not the sub-domains.
 
-**(COMMENT: And that was it, the script worked as intended and was written entirely without any direct coding by me.
-At this point, out of curiosity I asked it about licensing the code)**
+>**(COMMENT: And that was it, the script worked as intended and was written entirely without any direct coding by me.
+>At this point, out of curiosity I asked it about licensing the code)**
 
 *Me: what license should code you write be released under*
 
