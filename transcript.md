@@ -253,6 +253,217 @@ In general, the MIT license is a permissive license that allows for free use, mo
 
 If you are unsure which license to use, it's a good idea to consult with a legal professional or research the various open-source licenses to determine which one is best suited for your needs.
 
+### UPDATE - Having ChatGPT turn the script into a GUI application
+
+*Me: can you make this script a GUI application written in tkinter?*
+
+ChatGPT: Yes, you can make the script a GUI application using the `tkinter` library in Python.
+
+Here is an example of how you could create a GUI version of the script using `tkinter`:
+```
+import argparse
+import tkinter as tk
+import tkinter.ttk as ttk
+import whois
+
+def check_domain_availability(domain_name):
+    try:
+        w = whois.whois(domain_name)
+        if w.status == None:
+            return domain_name + " is available"
+        else:
+            expiry_date = w.expiration_date
+            if expiry_date:
+                return domain_name + " is not available. Expiry date: " + str(expiry_date)
+            else:
+                return domain_name + " is not available"
+    except whois.parser.PywhoisError:
+        return domain_name + " is available"
+    except:
+        return "Error: Invalid domain name or unable to connect to WHOIS server."
+
+class GUI:
+    def __init__(self, master):
+        self.master = master
+        master.title("Domain Availability Checker")
+        self.label = tk.Label(master, text="Enter Domain Name:")
+        self.label.grid(row=0, column=0, pady=10, padx=10)
+        self.entry = tk.Entry(master, width=50)
+        self.entry.grid(row=0, column=1, pady=10, padx=10)
+        self.check_btn = tk.Button(master, text="Check", command=self.check)
+        self.check_btn.grid(row=1, column=1, pady=10, padx=10)
+        self.result_label = tk.Label(master, text="", font=("TkDefaultFont", 12))
+        self.result_label.grid(row=2, column=1, pady=10, padx=10)
+    
+    def check(self):
+        domain = self.entry.get()
+        result = check_domain_availability(domain)
+        self.result_label.config(text=result)
+
+root = tk.Tk()
+app = GUI(root)
+root.mainloop()
+```
+
+In this example, the `check_domain_availability` function remains the same, but it is now part of a `GUI` class. The `__init__` method sets up the GUI with a label, entry, button, and result label. The `check` method gets the entered domain from the entry, calls the `check_domain_availability` function, and displays the result in the result label.
+
+This code will create a GUI application with a text entry, a check button, and a label to display the result. When you run the script, a window will appear with the label "Enter Domain Name" and a text entry where you can enter a domain name. When you click the "Check" button, the script will display the availability status of the entered domain in the result label.
+
+*Me: make the check button and the result label be centered in the window*
+
+ChatGPT: Here's the updated code with the check button and result label centered in the window:
+
+```
+import tkinter as tk
+import whois
+
+def check_domain_availability(domain_name):
+    try:
+        w = whois.whois(domain_name)
+        if w.status == None:
+            return domain_name + " is available"
+        else:
+            expiry_date = w.expiration_date
+            if expiry_date:
+                return domain_name + " is not available. Expiry date: " + str(expiry_date)
+            else:
+                return domain_name + " is not available"
+    except whois.parser.PywhoisError:
+        return domain_name + " is available"
+    except:
+        return "Error: Invalid domain name or unable to connect to WHOIS server."
+
+class GUI:
+    def __init__(self, master):
+        self.master = master
+        master.title("Domain Availability Checker")
+        self.label = tk.Label(master, text="Enter Domain Name:")
+        self.entry = tk.Entry(master, width=50)
+        self.check_btn = tk.Button(master, text="Check", command=self.check)
+        self.result_label = tk.Label(master, text="", font=("TkDefaultFont", 12))
+
+        self.label.pack(pady=10)
+        self.entry.pack(pady=10)
+        self.check_btn.pack(pady=10)
+        self.result_label.pack(pady=10)
+    
+    def check(self):
+        domain = self.entry.get()
+        result = check_domain_availability(domain)
+        self.result_label.config(text=result)
+
+root = tk.Tk()
+app = GUI(root)
+root.mainloop()
+
+```
+
+In this updated code, the `pack` method is used instead of `grid` to center the widgets in the window. The `pady` argument is used to add some vertical padding to each widget.
+
+*Me: add 10 pixels of padding on either side of the box where you enter the domain name*
+
+ChatGPT: Here's the updated code with 10 pixels of padding on either side of the box where you enter the domain name:
+
+```
+import tkinter as tk
+import whois
+
+def check_domain_availability(domain_name):
+    try:
+        w = whois.whois(domain_name)
+        if w.status == None:
+            return domain_name + " is available"
+        else:
+            expiry_date = w.expiration_date
+            if expiry_date:
+                return domain_name + " is not available. Expiry date: " + str(expiry_date)
+            else:
+                return domain_name + " is not available"
+    except whois.parser.PywhoisError:
+        return domain_name + " is available"
+    except:
+        return "Error: Invalid domain name or unable to connect to WHOIS server."
+
+class GUI:
+    def __init__(self, master):
+        self.master = master
+        master.title("Domain Availability Checker")
+        self.label = tk.Label(master, text="Enter Domain Name:")
+        self.entry = tk.Entry(master, width=50)
+        self.check_btn = tk.Button(master, text="Check", command=self.check)
+        self.result_label = tk.Label(master, text="", font=("TkDefaultFont", 12))
+
+        self.label.pack(pady=10)
+        self.entry.pack(pady=10, padx=10)
+        self.check_btn.pack(pady=10)
+        self.result_label.pack(pady=10)
+    
+    def check(self):
+        domain = self.entry.get()
+        result = check_domain_availability(domain)
+        self.result_label.config(text=result)
+
+root = tk.Tk()
+app = GUI(root)
+root.mainloop()
+
+```
+
+In this updated code, the `padx` argument is added to the `pack` method for the `entry` widget to add horizontal padding on either side of the box where you enter the domain name.
+
+*Me: can you center the check button and the result label using the grid method?*
+
+ChatGPT: Here's the updated code that uses the `grid` method to center the check button and the result label:
+```
+import tkinter as tk
+import whois
+
+def check_domain_availability(domain_name):
+    try:
+        w = whois.whois(domain_name)
+        if w.status == None:
+            return domain_name + " is available"
+        else:
+            expiry_date = w.expiration_date
+            if expiry_date:
+                return domain_name + " is not available. Expiry date: " + str(expiry_date)
+            else:
+                return domain_name + " is not available"
+    except whois.parser.PywhoisError:
+        return domain_name + " is available"
+    except:
+        return "Error: Invalid domain name or unable to connect to WHOIS server."
+
+class GUI:
+    def __init__(self, master):
+        self.master = master
+        master.title("Domain Availability Checker")
+        self.label = tk.Label(master, text="Enter Domain Name:")
+        self.entry = tk.Entry(master, width=50)
+        self.check_btn = tk.Button(master, text="Check", command=self.check)
+        self.result_label = tk.Label(master, text="", font=("TkDefaultFont", 12))
+
+        self.label.grid(row=0, pady=10)
+        self.entry.grid(row=1, pady=10, padx=10)
+        self.check_btn.grid(row=2, pady=10, columnspan=2, sticky="nsew")
+        self.result_label.grid(row=3, pady=10, columnspan=2, sticky="nsew")
+
+        master.grid_columnconfigure(0, weight=1)
+        master.grid_columnconfigure(1, weight=1)
+    
+    def check(self):
+        domain = self.entry.get()
+        result = check_domain_availability(domain)
+        self.result_label.config(text=result)
+
+root = tk.Tk()
+app = GUI(root)
+root.mainloop()
+
+```
+
+In this updated code, the `grid` method is used to layout the widgets and the `grid_columnconfigure` method is used to make sure that the two columns in the grid take up equal amounts of space, thus allowing the check button and the result label to be centered in the window. The `columnspan` argument is used to make the check button and the result label span both columns, and the `sticky` argument is used to make sure that the check button and the result label are centered vertically.
+
 **END TRANSCRIPT**
 ---
 

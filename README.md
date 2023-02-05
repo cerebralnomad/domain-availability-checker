@@ -13,3 +13,27 @@ For the entire transcript of the conversation that generated this code see the f
 Granted this is a simple script, but it took only a few iterations to complete.  
 My idea was to have a job I wanted done and see if ChatGPT would write the code needed to perform the task 
 without me requiring any coding skills at all.
+
+### UPDATE
+
+I went back and had ChatGPT write a GUI version of the script using TKinter.
+It took only a few iterations to generate the final script, although the first run resulted in a properly working GUI app.
+
+To run the GUI version, TKinter will have to be installed on your system.
+
+#### Installing TKinter
+Debian/Ubuntu:
+```
+sudo apt install python3-pip
+pip install tkinter
+```
+Fedora:
+```
+sudo dnf install python3-pip
+pip install tkinter
+```
+Arch:
+```
+sudo pacman -S python-pip
+pip install tkinter
+```
